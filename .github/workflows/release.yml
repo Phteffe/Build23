@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: fungover/haze
+  IMAGE_NAME: phteffe/build23
 
 jobs:
   build-and-push:
