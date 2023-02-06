@@ -54,3 +54,4 @@ jobs:
           tags: |
             phteffe/build23:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          labels: ${{ steps.meta.outputs.labels }}
