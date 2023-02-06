@@ -4,9 +4,9 @@ on:
   release:
     types: [ published ]
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: phteffe/build23
+#env:
+#  REGISTRY: ghcr.io
+#  IMAGE_NAME: phteffe/build23
 
 jobs:
   build-and-push:
@@ -51,5 +51,6 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: |
+            phteffe/build23:latest
+            ghcr.io/phteffe/build23:latest
