@@ -21,7 +21,7 @@ jobs:
         with:
           images:
             ghcr.io
-            ghcr.io/fungover/haze
+            fungover/haze
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
