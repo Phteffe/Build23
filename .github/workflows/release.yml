@@ -4,10 +4,6 @@ on:
   release:
     types: [ published ]
 
-#    env:
-#      REGISTRY: ghcr.io
-#      IMAGE_NAME: ${{ github.repository }}
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -19,6 +15,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images:
+            ghcr.io
+            ghcr.io/fungover/haze
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
@@ -28,7 +32,6 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
-#          registry: ${{ env.REGISTRY }}
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
@@ -39,11 +42,6 @@ jobs:
             username: ${{ github.actor }}
             password: ${{ secrets.GITHUB_TOKEN }}
 
-#      - name: Extract metadata (tags, labels) for Docker
-#        id: meta
-#        uses: docker/metadata-action@57396166ad8aefe6098280995947635806a0e6ea
-#        with:
-#          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Build and push
         uses: docker/build-push-action@v4
@@ -51,4 +49,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
-          tags: ghcr.io/phteffe/build23/testimage:latest
+          tags: ${{ steps.meta.outputs.tags }}
