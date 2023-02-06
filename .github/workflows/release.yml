@@ -53,5 +53,5 @@ jobs:
           push: true
           tags: |
             phteffe/build23:latest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+            ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
