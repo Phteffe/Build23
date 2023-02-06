@@ -4,9 +4,9 @@ on:
   release:
     types: [ published ]
 
-#env:
-#  REGISTRY: ghcr.io
-#  IMAGE_NAME: fungover/haze
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: fungover/haze
 
 jobs:
   build-and-push:
@@ -42,9 +42,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images:
-            fungover/haze
-            ghcr.io/fungover/haze
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
 
       - name: Build and push
