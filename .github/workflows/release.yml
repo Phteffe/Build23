@@ -22,6 +22,14 @@ jobs:
           images:
             ghcr.io
             fungover/haze
+          tags:
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -50,3 +58,4 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
