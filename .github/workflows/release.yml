@@ -4,9 +4,9 @@ on:
   release:
     types: [ published ]
 
-#env:
-#  REGISTRY: ghcr.io
-#  IMAGE_NAME: phteffe/build23
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: phteffe/build23
 
 jobs:
   build-and-push:
@@ -53,4 +53,4 @@ jobs:
           push: true
           tags: |
             phteffe/build23:latest
-            ghcr.io/phteffe/build23:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
