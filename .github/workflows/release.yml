@@ -4,9 +4,9 @@ on:
   release:
     types: [ published ]
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+#env:
+#  REGISTRY: ghcr.io
+#  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build-and-push:
@@ -42,7 +42,18 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images:  |
+            name/app
+            ghcr.io/username/app
+          tags: |
+            type=ref,event=tag
+#                  raw = v1.0.0
+            type=semver,pattern={{raw}}
+#                  version = 1.0.0
+            type=semver,pattern={{version}}
+#                  major.minor = 1.0
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
 
 
       - name: Build and push
@@ -51,7 +62,5 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
-          tags: |
-            phteffe/build23:latest
-            ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
