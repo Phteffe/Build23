@@ -45,7 +45,7 @@ jobs:
         images: |
                   name/app
                   ghcr.io/username/app
-                  tags: |
+        tags: |
                   type=ref,event=tag
 #                            raw = v1.0.0
                   type=semver,pattern={{raw}}
@@ -54,8 +54,6 @@ jobs:
 #                            major.minor = 1.0
                   type=semver,pattern={{major}}.{{minor}}
                   type=sha
-
-
 
       - name: Build and push
         uses: docker/build-push-action@v4
