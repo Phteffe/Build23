@@ -34,26 +34,26 @@ jobs:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
-            registry: ghcr.io
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: |
-            name/app
-            ghcr.io/username/app
-          tags: |
-            type=ref,event=tag
-#                  raw = v1.0.0
-            type=semver,pattern={{raw}}
-#                  version = 1.0.0
-            type=semver,pattern={{version}}
-#                  major.minor = 1.0
-            type=semver,pattern={{major}}.{{minor}}
-            type=sha
+        images: |
+                  name/app
+                  ghcr.io/username/app
+                  tags: |
+                  type=ref,event=tag
+#                            raw = v1.0.0
+                  type=semver,pattern={{raw}}
+#                            version = 1.0.0
+                  type=semver,pattern={{version}}
+#                            major.minor = 1.0
+                  type=semver,pattern={{major}}.{{minor}}
+                  type=sha
 
 
 
