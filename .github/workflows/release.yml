@@ -39,8 +39,8 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            name/app
-            ghcr.io/username/app
+            phteffe/build23
+            ghcr.io/phteffe/build23
           tags: |
             type=ref,event=tag
             type=semver,pattern={{raw}}
